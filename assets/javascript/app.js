@@ -21,6 +21,26 @@ $(document).on('click', '#start', function(e) {
   game.loadQuestion();
 });
  
+//This is an attempt to set a timer//
+
+setTimeout(timeUp, 1000 * 180);
+
+function 180seconds() {
+
+  // in the element with an id of time-left add an h2 saying About 10 Seconds Left!
+  // console log 180 seconds left
+  $("#time-left").append("<h2>You have 3 minutes!</h2>");
+  console.log("3 minutes ");
+}
+
+function timeUp() {
+
+  // in the element with an id of time-left add an h2 saying Time's Up!
+  // console log done
+  console.log("done");
+  $("#time-left").append("<h2>Time's Up!</h2>");
+  console.log("time is up");
+
 
 //This is the question set with choice available for the user to answer. The user should click on an answer.//
 //These are poetry questions. I provide lines of poetry. The user has to answer which poet wrote these lines.
@@ -118,6 +138,7 @@ I   "In Xanadu did Kubla Khan/
 
 // These are potential arguments to load questions etc. These conditions should load questions, go on to the next question, clear and set intervals,//
 //The code should try to append the correct answer for the user to see when it is answered incorrectly.//
+//I don't think I'm doing any of this properly.//
 
 var panel = $('#quiz-area');
 var timerCounter =    ;
@@ -188,7 +209,7 @@ var game = {
   answeredIncorrectly: function() {
     game.incorrect++;
     clearInterval(timer);
-    panel.html('<h2>Nope!</h2>');
+    panel.html('<h2>Incorrect!</h2>');
     panel.append('<h3>The Correct Answer was: ' + questions[game.currentQuestion].correctAnswer + '</h3>');
     panel.append('<img src="' + questions[game.currentQuestion].image + '" />');
 
