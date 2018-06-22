@@ -2,17 +2,8 @@
 
 
 $(document).ready(function(){
-  $("this").click(function(){
-      $("p").slideToggle();
-  });
-});
-
-
-var panel = $('#quiz-area');
-var countStartNumber =    ;
-var winCoutner=0
-var lossCounter=0
-
+   
+ 
 
 
 //This jQuery syntax should trigger an event, such as resetting the game.//
@@ -128,6 +119,11 @@ I   "In Xanadu did Kubla Khan/
 // These are potential arguments to load questions etc. These conditions should load questions, go on to the next question, clear and set intervals,//
 //The code should try to append the correct answer for the user to see when it is answered incorrectly.//
 
+var panel = $('#quiz-area');
+var timerCounter =    ;
+var winCoutner=0 ;
+var lossCounter=0 ;
+
 var game = {
   questions:       ,
   currentQuestion:0,
@@ -222,3 +218,5 @@ var game = {
     this.loadQuestion();
   }
 };
+
+});
