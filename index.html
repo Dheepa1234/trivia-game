@@ -1,70 +1,146 @@
 <!DOCTYPE html>
-<html lang="en">
-      <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
+	<html>
+	<head>
+		<title>Trivia Game</title>
 
-      <title>Poetry Trivia Game</title>
+		<!-- Link in CSS Files -->
+		<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
-<!--Links-->
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css">
-  <link rel="stylesheet" href="assets/css/style.css">
-
-<!--Viewport tag for mobile responsiveness-->
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  
-<img src="assets/images/poetry.png" alt="Poetry">
+	</head>
+	<body>
 
 
-      </head>
+	<!-- Start of the game -->
+		<div id = start_container>
+			<!-- Static Game Logo -->
+			<h1 class = "logo">Shakespeare Trivia</h1>
+			<img src="assets/images/Shakespeare1.jpeg" alt="Shakespeare" width="500" height="333">
+
+			<button id = start_button>Start</button>
+		</div>
+	
+		<div id="main-container" class="container">
+			<section class="main-section">
+				<h1 class="rules">The Rules</h1>
+				<p class="rules">There are 10 questions. You have 60 seconds to answer all 10 questions.</p>
+				<h1>
 
 
-<body>
+		<!-- During Gameplay Container -->
+		<div id = mid_game_container>
+			<!-- Static Game Logo -->
+			<h1 class = "logo">Shakespeare Trivia</h1>
 
-  <div class="wrapper">
-      <h1>Poet's Corner: Poetry Trivia Game!</h1>
-    <div class="subwrapper">
-      <div class="quiz-area">
-        <button id="start">Start</button>
-      <div>
-    <div class="TimerCounter">
-        <h1> Time remaining: </h1>
-      </div>
-    <div class="QuestionLoad">
-         <h2>Who wrote this?</h2>
-    </div>
+			<!-- Game Timer -->
+			<h1 id = "timer_line">Time Remaining: <span id = "timer_number">60 Seconds</span></h1>
 
-  <!-- Here, there should be a section alerting the user to whether they got the answer correct or not.>
+			<!-- Game Questions -->
+
+			<h1>1. Where was Shakespeare born?</h1>
+			<!--Stratford-upon-Avon-->
+				<input type="radio" name="q1" value="Stratford-upon-Avon">Stratford-upon-Avon
+				<input type="radio" name="q1" value="London">London 
+				<input type="radio" name="q1" value="Manchester">Manchester
+				<input type="radio" name="q1" value="Sheffield">Sheffield
+				
+
+            <h1>2. What was the name of Shakespeare’s wife?</h1>
+            <!--Anne Hathaway-->
+		
+				<input type="radio" name="q2" value="Gwyneth Paltrow">Gwyneth Paltrow
+				<input type="radio" name="q2" value="Emily Bronte">Emily Bronte
+				<input type="radio" name="q2" value="Anne Hathaway">Anne Hathaway
+				<input type="radio" name="q2" value="Jane Austen">Jane Austen
 
 
-    </div>
-  </div>
+			<h1>3. How many sonnets did Shakespeare write?</h1>
+			<!--154-->
+				<input type="radio" name="q3" value="The Daily Targum">100
+				<input type="radio" name="q3" value="Rutgers Daily">78
+				<input type="radio" name="q3" value="The Medium">52
+				<input type="radio" name="q3" value="154">154
 
-  <script type="text/javascript" src="assets/javascript/app.js"></script>
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-</body>
+
+			<h1>4. How many times does suicide occur in Shakespeare’s plays?</h1>
+			<!-- 13 -->
+				<input type="radio" name="q4" value="#">#2
+				<input type="radio" name="q4" value="#">#13
+				<input type="radio" name="q4" value="#">#7
+				<input type="radio" name="q4" value="#">#5
+				 
+
+
+			<h1>5. What is the name of Shakespeare’s theater?</h1>
+			<!--The Globe-->
+				<input type="radio" name="q5" value="The Globe">#The Globe
+				<input type="radio" name="q5" value="Cineplex">#Cineplex
+				<input type="radio" name="q5" value="Stratford Theatre">#Stratford Theatre
+				<input type="radio" name="q5" value="Royal Albert Hall">#Royal Albert Hall
+				
+			
+			<h1>6. Who was the British monarch when Shakespeare died? </h1>
+			<!--James I  -->
+				<input type="radio" name="q6" value="Henry VIII">#Elizabeth I
+				<input type="radio" name="q6" value="James I"># James I
+				<input type="radio" name="q6" value="Henry VII"># Charles II
+				<input type="radio" name="q6" value="Elizabeth I">#Elizabeth II
+				
+
+			<h1>7. Which of these is an excerpt from Shakespeare's grave in Stratford-upon-Avon? </h1>
+					<!--  -->
+				<input type="radio" name="q7" value="For his mourners will be outcast men, And outcasts always mourn.">"For his mourners will be outcast men, And outcasts always mourn."
+				<input type="radio" name="q7" value="Reader, if you seek his monument -- look around you.">"Reader, if you seek his monument -- look around you."
+				<input type="radio" name="q7" value="Bleste be the man that spares these stones, And curst be he that moves my bones.">"Bleste be the man that spares these stones, And curst be he that moves my bones."
+				<input type="radio" name="q7" value="Cast a cold eye on life, on death. Horseman, pass by.">"Cast a cold eye on life, on death. Horseman, pass by."
+
+			<h1>8. Which of these phrases was NOT coined by Shakespeare?</h1>
+			<!--Devil-may-care -->
+				<input type="radio" name="q8" value="Devil-may-care">Devil-may-care 
+				<input type="radio" name="q8" value="Mum's the word">Mum's the word
+				<input type="radio" name="q8" value="Dead as a doornail">Dead as a doornail
+				<input type="radio" name="q8" value="All's well that ends well">#All's well that ends well
+
+			<h1>9. Which Shakespeare play includes a clock striking three -- before clocks were invented?</h1>
+			<!--Julius Caesar -->
+				<input type="radio" name="q9" value="King Lear">King Lear
+				<input type="radio" name="q9" value="Cleopatra">Cleopatra
+				<input type="radio" name="q9" value="Titus Andronicus">Titus Andronicus
+				<input type="radio" name="q9" value="Julius Caesar">Julius Caesar
+
+			<h1>10. Which of these is NOT one of the seven ages of man, according to Shakespeare?</h1>
+			<!-- The joker -->
+				<input type="radio" name="q10" value="The school-boy">The school-boy
+				<input type="radio" name="q10" value="The lover">The lover
+				<input type="radio" name="q10" value="The soldier">The soldier
+				<input type="radio" name="q10" value="The joker">The joker
+
+				<br>
+
+
+			<button id = done_button>Done!</button>
+
+		</div>
+
+		<!-- End of the game -->
+		<div id = end_container>
+			<!-- Static Game Logo -->
+			<h1 class = "logo">Shakespeare Trivia</h1>
+
+			<h1 id = "done">All Done!</h1>
+			<br>
+
+			<h1>Correct Answers: <span id = "correct_answers">0</span></h1>
+			<h1>Incorrect Answers: <span id = wrong_answers>0</span></h1>
+			<h1>Unanswered: <span id = "unanswered">0</span></h1>
+		</div>
+			
+
+		<!-- Link in jQuery -->
+		<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+		<!-- Link in JavaScript -->
+		<script src="assets/javascript/app.js"></script>
+		
+	</body>
 </html>
-            
-            
-               
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  

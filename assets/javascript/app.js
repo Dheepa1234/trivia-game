@@ -1,243 +1,246 @@
-//I start the code with the document-ready function //
+
+// Page timer is set to 60 seconds
+//var limit = 60*1000;
 
 
+// Countdown also starts at 60 seconds (same at the limit of the page timer)
+var count = 60;
+
+
+// Count of Right, Wrong, and unanswered Qustions
+var correctCount = 0;
+var wrongCount = 0;
+var unansweredCount = 0;
+
+
+
+// ------------------------ Game Functions are below ------------------------
 $(document).ready(function(){
-   
- 
+
+	// TimeOut page after 1 minute
+	//setTimeout(timeUp, limit); <--- worked around it with a hack (count = 0 manaul set)
 
 
-//This jQuery syntax should trigger an event, such as resetting the game.//
 
-$(document).on('click', '#start-over', function(e) {
-  game.reset();
-});
+	// Intialize the game with hidden Divs
+	$("#mid_game_container").hide();
+	$("#end_container").hide();
 
-$(document).on('click', '.answer-button', function(e) {
-  game.clicked(e);
-});
+	
 
-$(document).on('click', '#start', function(e) {
-  $('#subwrapper').prepend('<h2>Time Remaining: <span id="counter-number">180</span> Seconds</h2>');
-  game.loadQuestion();
-});
- 
-//This is an attempt to set a timer//
-
-setTimeout(timeUp, 1000 * 180);
-
-function 180seconds() {
-
-  // in the element with an id of time-left add an h2 saying About 10 Seconds Left!
-  // console log 180 seconds left
-  $("#time-left").append("<h2>You have 3 minutes!</h2>");
-  console.log("3 minutes ");
-}
-
-function timeUp() {
-
-  // in the element with an id of time-left add an h2 saying Time's Up!
-  // console log done
-  console.log("done");
-  $("#time-left").append("<h2>Time's Up!</h2>");
-  console.log("time is up");
+	// Set Scroll position so it looks good
+	window.scrollTo(0, 500);
 
 
-//This is the question set with choice available for the user to answer. The user should click on an answer.//
-//These are poetry questions. I provide lines of poetry. The user has to answer which poet wrote these lines.
-//The index value is giveen in the correct answer propery.//
 
 
-var questions = [{
-    question: "Which poet wrote these lines?:
-    "Do not go gentle into that good night,/
-    Old age should burn and rave at close of day,/
-    Rage, rage against the dying of the light.",
-    
-    choices: ["Robert Frost", "Lawrence Ferlinghetti", "Dylan Thomas", "Robert Browning"],
-    correctAnswer: 3
-}, {
-    
-  {
-    question: "Which poet wrote these lines?:
-I   "In Xanadu did Kubla Khan/
-    A stately pleasure-dome decree :/
-    Where Alph, the sacred river, ran/
-    Through caverns measureless to man/
-    Down to a sunless sea.",
-    choices: ["William Wordsworth", "Allen Ginsberg", "Wallace Stevens", "Samuel T. Coleridge"],
-    correctAnswer: 3
+	$("#start_button").on("click", function(){
 
-}, {
-    question: "Who wrote this poem?:
-    "I loved you, and I probably still do,/
-    And for a while the feeling may remain.../
-    But let my love no longer trouble you,/
-    I do not wish to cause you any pain./
-    I loved you; and the hopelessness I knew,/
-    The jealousy, the shyness – though in vain –/
-    Made up a love so tender and so true/
-    As may God grant you to be loved again.",
-    choices: ["Elizabeth Barrett Browning", "Emily Bronte", "Edgar Allan Poe", "Alexander Pushkin"],
-    correctAnswer: 3
-
-}, {
-    question: "What poet wrote these lines?:
-    "If you can keep your head when all about you/
-    Are losing theirs and blaming it on you,/
-    If you can trust yourself when all men doubt you,/
-    But make allowance for their doubting too;/  
-    If you can wait and not be tired by waiting,/
-    Or being lied about, don’t deal in lies,/
-    Or being hated, don’t give way to hating..../
-    Yours is the Earth and everything that’s in it...."
-
-    choices: ["Ralph Waldo Emerson", "Rudyard Kipling", "Pablo Neruda", "Edgar Allan Poe"],
-    correctAnswer: 1
-
-}, {
-    question: "Who wrote this poem? 
-    "Bright star, would I were stedfast as thou art –/ 
-    Not in lone splendour hung aloft the night/
-    And watching, with eternal lids apart,/
-    Like nature's patient, sleepless Eremite,/
-    The moving waters at their priestlike task/
-    Of pure ablution round earth's human shores,/
-    Or gazing on the new soft-fallen mask/
-    Of snow upon the mountains and the moors –/
-    No – yet still stedfast, still unchangeable,/
-    Pillow'd upon my fair love's ripening breast,/
-    To feel for ever its soft fall and swell,/
-    Awake for ever in a sweet unrest,/
-    Still, still to hear her tender-taken breath,/
-    And so live ever – or else swoon to death."
-    
-    choices: ["William Blake", "Percy Bysshe Shelley", "Robert Browning", "John Keats"],
-    correctAnswer: 0
-
-    question: "Who wrote this poem?"
-    "Death, be not proud, though some have called thee/
-    Mighty and dreadful, for thou art not so;/
-    For those whom thou think'st thou dost overthrow/
-    Die not, poor Death, nor yet canst thou kill me."
-
-    choices: ["Robert Browning", "John Milton", "Lady Jane Grey", "John Donne"],
-    correctAnswer: 3
-}, {
+		// Hide the start Div from the user
+		$("#start_container").hide();
 
 
-    question: "Which poet wrote these lines?:
-    "April is the cruellest month, breeding
-     Lilacs out of the dead land, mixing
-      Memory and desire, stirring
-      Dull roots with spring rain.""
-    choices: ["T.S. Eliot", “E.E. Cummings", “J. Alfred  Prufrock", "Lewis Carroll"],
-    correctAnswer: 0
-}, {
+		// Show the Game Div
+		$("#mid_game_container").show();
 
-}];
+		startCountdown();
+		return;
 
-// These are potential arguments to load questions etc. These conditions should load questions, go on to the next question, clear and set intervals,//
-//The code should try to append the correct answer for the user to see when it is answered incorrectly.//
-//I don't think I'm doing any of this properly.//
+	});
 
-var panel = $('#quiz-area');
-var timerCounter =    ;
-var winCoutner=0 ;
-var lossCounter=0 ;
 
-var game = {
-  questions:       ,
-  currentQuestion:0,
-  counter:countStartNumber,
-  correct:0,
-  incorrect:0,
-  countdown: function(){
-    game.counter--;
-    $('#counter-number').html(game.counter);
 
-    if (game.counter === 0){
-      console.log('TIMES UP');
-      game.timesUp();
-    }
-  },
-  loadQuestion: function(){
-    timer = setInterval(game.countdown, 1000);
-    panel.html('<h2>' + questions[this.currentQuestion].question + '</h2>' );
-    for (var i = 0; i<questions[this.currentQuestion].answers.length; i++){
-      panel.append('<button class="answer-button" id="button"' + 'data-name="' + questions[this.currentQuestion].answers[i] + '">' + questions[this.currentQuestion].answers[i]+ '</button>');
-    }
-  },
-  nextQuestion: function(){
-    game.counter = countStartNumber;
-    $('#counter-number').html(game.counter);
-    game.currentQuestion++;
-    game.loadQuestion();
-  },
-  timeUp: function (){
-    clearInterval(timer);
-    $('#counter-number').html(game.counter);
+	// Counts down and displays the time to the user
+	function countdown(){
 
-    panel.html('<h2>Out of Time!</h2>');
-    panel.append('<h3>The Correct Answer was: ' + questions[this.currentQuestion].correctAnswer);
-    panel.append('<img src="' + questions[this.currentQuestion].image + '" />');
+		// Decrement the counter, down from 60 seconds
+		count--;
 
-    if (game.currentQuestion === questions.length - 1){
-      setTimeout(game.results, 3 * 1000);
-    } else {
-      setTimeout(game.nextQuestion, 3 * 1000);
-    }
-  },
-  results: function() {
-    clearInterval(timer);
+		// Display the count to the user in the DOM
+    	$('#timer_number').html(count + " Seconds");
 
-    panel.html('<h2>All done, heres how you did!</h2>');
-    $('#counter-number').html(game.counter);
-    panel.append('<h3>Correct Answers: ' + game.correct + '</h3>');
-    panel.append('<h3>Incorrect Answers: ' + game.incorrect + '</h3>');
-    panel.append('<h3>Unanswered: ' + (questions.length - (game.incorrect + game.correct)) + '</h3>');
-    panel.append('<br><button id="start-over">Start Over?</button>');
-  },
-  clicked: function(e) {
-    clearInterval(timer);
+    	
 
-    if ($(e.target).data("name") === questions[this.currentQuestion].correctAnswer){
-      this.answeredCorrectly();
-    } else {
-      this.answeredIncorrectly();
-    }
-  },
-  answeredIncorrectly: function() {
-    game.incorrect++;
-    clearInterval(timer);
-    panel.html('<h2>Incorrect!</h2>');
-    panel.append('<h3>The Correct Answer was: ' + questions[game.currentQuestion].correctAnswer + '</h3>');
-    panel.append('<img src="' + questions[game.currentQuestion].image + '" />');
+    	// ----------- Handle Cases for Time ar 0 Seconds -----------
+			// User finishes before time is up and clicks done
+			$("#done_button").on("click", function(){
 
-    if (game.currentQuestion === questions.length - 1){
-      setTimeout(game.results, 3 * 1000);
-    } else {
-      setTimeout(game.nextQuestion, 3 * 1000);
-    }
-  },
-  answeredCorrectly: function(){
-    clearInterval(timer);
-    game.correct++;
-    panel.html('<h2>Correct!</h2>');
-    panel.append('<img src="' + questions[game.currentQuestion].image + '" />');
+			// Stop the countdown and run the timeUp function
+			//clearInterval(startCountdown);
+			count = 0; // <---- Needed a hack since I couldn't get the clearInterval function to work... It's been a long week :/
+			return;
 
-    if (game.currentQuestion === questions.length - 1){
-      setTimeout(game.results, 3 * 1000);
-    } else {
-      setTimeout(game.nextQuestion, 3 * 1000);
-    }
-  },
-  reset: function(){
-    this.currentQuestion = 0;
-    this.counter = countStartNumber;
-    this.correct = 0;
-    this.incorrect = 0;
-    this.loadQuestion();
-  }
-};
+			});
+
+
+			// Finish the game after the timer reaches 0
+			if(count == -1){
+
+				// Collect the radio inputs
+				timeUp();
+
+				// Hide the game Div from the user
+				$("#mid_game_container").hide();
+
+			}
+
+
+	}
+
+
+	// Show the countdown, increment is 1 second
+	function startCountdown(){
+
+		setInterval(countdown, 1000);
+
+	}
+
+
+	// Function to be run after the timer is up
+	function timeUp(){
+
+
+		// Checked values of Radio Buttons
+		var Q1 = $('input:radio[name="q1"]:checked').val();
+		var Q2 = $('input:radio[name="q2"]:checked').val();
+		var Q3 = $('input:radio[name="q3"]:checked').val();
+		var Q4 = $('input:radio[name="q4"]:checked').val();
+		var Q5 = $('input:radio[name="q5"]:checked').val();
+		var Q6 = $('input:radio[name="q6"]:checked').val();
+		var Q7 = $('input:radio[name="q7"]:checked').val();
+		var Q8 = $('input:radio[name="q8"]:checked').val();
+		var Q9 = $('input:radio[name="q9"]:checked').val();
+		var Q10 = $('input:radio[name="q10"]:checked').val();
+
+
+
+		// Determine the right/wrong/unanswered counts ( This count be a lot more DRY :/ )
+		if(Q1 == undefined){
+			unansweredCount++;
+		}
+		else if(Q1 == "Stratford-upon-Avon"){
+			correctCount++;
+		}
+		else{
+			wrongCount++;
+		}
+
+
+		if(Q2 == undefined){
+			unansweredCount++;
+		}
+		else if(Q2 == "Anne Hathaway"){
+			correctCount++;
+		}
+		else{
+			wrongCount++;
+		}
+
+
+		if(Q3 == undefined){
+			unansweredCount++;
+		}
+		else if(Q3 == "154"){
+			correctCount++;
+		}
+		else{
+			wrongCount++;
+		}
+
+
+		if(Q4 == undefined){
+			unansweredCount++;
+		}
+		else if(Q4 == "13"){
+			correctCount++;
+		}
+		else{
+			wrongCount++;
+		}
+
+
+		if(Q5 == undefined){
+			unansweredCount++;
+		}
+		else if(Q5 == "The Globe"){
+			correctCount++;
+		}
+		else{
+			wrongCount++;
+		}
+
+
+		if(Q6 == undefined){
+			unansweredCount++;
+		}
+		else if(Q6 == "James I"){
+			correctCount++;
+		}
+		else{
+			wrongCount++;
+		}
+
+
+		if(Q7 == undefined){
+			unansweredCount++;
+		}
+		else if(Q7 == "Bleste be the man that spares these stones, And curst be he that moves my bones."){
+			correctCount++;
+		}
+		else{
+			wrongCount++;
+		}
+
+
+		if(Q8 == undefined){
+			unansweredCount++;
+		}
+		else if(Q8 == "Devil-may-care"){
+			correctCount++;
+		}
+		else{
+			wrongCount++;
+		}
+
+
+		if(Q9 == undefined){
+			unansweredCount++;
+		}
+		else if(Q9 == "Julius Caesar "){
+			correctCount++;
+		}
+		else{
+			wrongCount++;
+		}
+
+
+
+		if(Q10 == undefined){
+			unansweredCount++;
+		}
+		else if(Q10 == "The joker"){
+			correctCount++;
+		}
+		else{
+			wrongCount++;
+		}
+
+
+
+
+		// After answers are validated, display the score results
+		$('#correct_answers').html(correctCount);
+		$('#wrong_answers').html(wrongCount);
+		$('#unanswered').html(unansweredCount);
+
+
+		// Show the completed Score Div
+		$("#end_container").show();
+
+
+		// Set Scroll position so it looks good
+		window.scrollTo(0, 550);
+
+	}
 
 });
